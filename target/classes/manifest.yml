@@ -1,0 +1,15 @@
+# Addon manifest file
+name: ExampleAddon
+version: 1.0.0
+main: org.crewco.template.ExampleAddon
+author: XST99
+description: An example addon that demonstrates the API
+
+# Optional fields
+authors:
+  - XST99
+
+#dependencies:
+#  - other-addon-id
+
+website: https://example.com
