@@ -179,8 +179,8 @@ Reloads one or all addons.
 
 **1. Create `pom.xml`:**
 
-```xml
 Add this dep to your project
+```xml
 <dependency>
     <groupId>org.xs-t</groupId>
     <artifactId>swc-core</artifactId>
