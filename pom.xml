@@ -8,7 +8,7 @@
 
     <groupId>org.crewco</groupId>
     <artifactId>ExampleAddon</artifactId>
-    <version>1.0</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
 
     <name>ExampleAddon</name>
@@ -47,8 +47,13 @@
         <dependency>
             <groupId>org.xs-t</groupId>
             <artifactId>swc-core</artifactId>
-            <version>0.0.4-SNAPSHOT</version>
+            <version>0.0.6-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.7.1</version>
         </dependency>
     </dependencies>
 
@@ -61,6 +66,35 @@
         </resources>
 
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.6.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <archive>
+                                <manifestEntries>
+                                    <Addon-Main>org.crewco.template.ExampleAddon</Addon-Main>
+                                    <Addon-Name>${project.name}</Addon-Name>
+                                    <Addon-Version>${project.version}</Addon-Version>
+                                    <Addon-Author>XST99</Addon-Author>
+                                </manifestEntries>
+                            </archive>
+                            <descriptorRefs>
+                                <descriptorRef>jar-with-dependencies</descriptorRef>
+                            </descriptorRefs>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+
             <!-- Kotlin Compiler -->
             <plugin>
                 <groupId>org.jetbrains.kotlin</groupId>

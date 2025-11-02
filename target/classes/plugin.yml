@@ -1,5 +1,5 @@
 name: TemplatePlugin
-version: '1.0'
+version: '0.0.1'
 main: org.crewco.template.Startup
 description: "A Template Plugin for 1.7.10"
 author: "XST99"

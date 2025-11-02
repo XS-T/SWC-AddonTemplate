@@ -6,6 +6,9 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.Plugin
 import org.crewco.swccore.api.addon.AbstractAddon
+import org.crewco.template.commands.MainCommand
+import org.crewco.template.listeners.JoinListener
+import org.crewco.template.listeners.QuitListener
 
 /**
  * Example addon implementation.
@@ -38,47 +41,22 @@ class ExampleAddon(plugin: Plugin) : AbstractAddon(plugin), Listener {
 
         // Register commands using the CommandManager (no plugin.yml needed!)
         registerCommand(
-            name = "examplecommand",
-            description = "An example command from the addon",
-            usage = "/examplecommand [arg]"
-        ) { sender, _, _, args ->
-            sender.sendMessage("§aHello from Example Addon!")
-            sender.sendMessage("§7You passed ${args.size} arguments")
-            if (args.isNotEmpty()) {
-                sender.sendMessage("§7First argument: ${args[0]}")
-            }
-            true
-        }
+            name = "example",
+            executor = MainCommand(this),
+            description = "Main example command",
+            usage = "/example <subcommand>",
+            aliases = listOf("ex", "exaddon"),
+            tabCompleter = MainCommand(this)
+        )
 
-        // Another example with tab completion
-        registerCommand(
-            name = "exampleinfo",
-            description = "Shows addon information",
-            usage = "/exampleinfo",
-            aliases = listOf("einfo", "exinfo"),
-            tabCompleter = org.bukkit.command.TabCompleter { _, _, _, args ->
-                if (args.size == 1) {
-                    listOf("version", "author", "status").filter {
-                        it.startsWith(args[0].lowercase())
-                    }
-                } else {
-                    emptyList()
-                }
-            }
-        ) { sender, _, _, args ->
-            when (args.firstOrNull()?.lowercase()) {
-                "version" -> sender.sendMessage("§aVersion: $version")
-                "author" -> sender.sendMessage("§aAuthors: ${authors.joinToString(", ")}")
-                "status" -> sender.sendMessage("§aStatus: ${if (isEnabled) "§2Enabled" else "§cDisabled"}")
-                else -> {
-                    sender.sendMessage("§e=== $name ===")
-                    sender.sendMessage("§7Version: §f$version")
-                    sender.sendMessage("§7Authors: §f${authors.joinToString(", ")}")
-                    sender.sendMessage("§7Description: §f$description")
-                }
-            }
-            true
-        }
+
+        // Register all listeners in one call
+        logInfo("Registering event listeners...")
+        registerEvents(
+            JoinListener(this),
+            QuitListener(this),
+        )
+        logInfo("Event listeners registered!")
 
         logInfo("Example addon has been enabled!")
 
