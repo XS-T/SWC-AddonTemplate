@@ -187,6 +187,11 @@
             <id>glaremasters-repo</id>
             <url>https://repo.glaremasters.me/repository/towny/</url>
         </repository>
+        <repository>
+          <id>github</id>
+          <name>GitHub XS-T Apache Maven Packages</name>
+          <url>https://maven.pkg.github.com/XS-T/SWC-Core/</url>
+        </repository>
     </repositories>
 
 </project>
