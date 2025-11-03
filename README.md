@@ -234,13 +234,6 @@ import org.crewco.swccore.api.addon.AbstractAddon
 import org.bukkit.plugin.Plugin
 
 class MyAddon(plugin: Plugin) : AbstractAddon(plugin) {
-
-    override val id = "my-addon"
-    override val name = "My Addon"
-    override val version = "1.0.0"
-    override val authors = listOf("YourName")
-    override val description = "A cool addon"
-
     override fun onLoad() {
         super.onLoad()
         logInfo("Loading...")
@@ -388,27 +381,6 @@ logWarning("Configuration missing, using defaults")
 logError("Failed to connect to database", exception)
 ```
 
-### Addon Interface
-
-Core interface that all addons must implement.
-
-```kotlin
-interface Addon {
-    val id: String              // Unique identifier
-    val name: String           // Display name
-    val version: String        // Version number
-    val authors: List<String>  // List of authors
-    val description: String    // Brief description
-    val dependencies: List<String>  // Required addon IDs
-    val plugin: Plugin         // Main plugin instance
-
-    fun onLoad()
-    fun onEnable()
-    fun onDisable()
-    fun onReload()
-}
-```
-
 ---
 
 ## 📄 manifest.yml Format
@@ -423,6 +395,10 @@ version: 1.0.0              # Semantic version
 main: com.example.MyAddon   # Full class path
 author: YourName            # Primary author
 description: Brief description of the addon
+plugin-dependencies:
+ - Example
+dependencies:
+ - addon-id
 ```
 
 ### Optional Fields
@@ -472,13 +448,6 @@ import org.crewco.swccore.api.addon.AbstractAddon
 import org.bukkit.plugin.Plugin
 
 class HelloAddon(plugin: Plugin) : AbstractAddon(plugin) {
-
-    override val id = "hello"
-    override val name = "Hello Addon"
-    override val version = "1.0.0"
-    override val authors = listOf("Dev")
-    override val description = "Says hello"
-
     override fun onEnable() {
         super.onEnable()
 
@@ -503,13 +472,6 @@ import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.Plugin
 
 class WelcomeAddon(plugin: Plugin) : AbstractAddon(plugin), Listener {
-
-    override val id = "welcome"
-    override val name = "Welcome Addon"
-    override val version = "1.0.0"
-    override val authors = listOf("Dev")
-    override val description = "Welcomes players"
-
     override fun onEnable() {
         super.onEnable()
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -534,13 +496,6 @@ import com.example.organized.commands.MainCommand
 import com.example.organized.listeners.*
 
 class OrganizedAddon(plugin: Plugin) : AbstractAddon(plugin) {
-
-    override val id = "organized"
-    override val name = "Organized Addon"
-    override val version = "1.0.0"
-    override val authors = listOf("Dev")
-    override val description = "Well-organized addon"
-
     override fun onEnable() {
         super.onEnable()
 
