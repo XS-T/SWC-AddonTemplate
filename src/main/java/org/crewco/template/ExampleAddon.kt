@@ -6,6 +6,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.plugin.Plugin
 import org.crewco.swccore.api.addon.AbstractAddon
+import org.crewco.swccore.api.addon.AddonConfig
 import org.crewco.template.commands.MainCommand
 import org.crewco.template.listeners.JoinListener
 import org.crewco.template.listeners.QuitListener
@@ -14,30 +15,32 @@ import org.crewco.template.listeners.QuitListener
  * Example addon implementation.
  * This shows how to create an addon for your plugin.
  */
-class ExampleAddon(plugin: Plugin) : AbstractAddon(plugin), Listener {
 
-    override val id: String = "example-addon"
-    override val name: String = "Example Addon"
-    override val version: String = "1.0.0"
-    override val authors: List<String> = listOf("YourName")
-    override val description: String = "An example addon that demonstrates the API"
-
-    // Optional: specify dependencies on other addons
-    override val dependencies: List<String> = emptyList()
-
+class ExampleAddon(plugin: Plugin) : AbstractAddon(plugin) {
+    companion object{
+        lateinit var addon:ExampleAddon
+        lateinit var config: AddonConfig
+    }
     override fun onLoad() {
         super.onLoad()
         logInfo("Example addon is loading...")
 
         // Initialize your addon's data here
         // Load configuration, setup data structures, etc.
+        addon = this
+        config = AddonConfig(this)
+        config.load()
     }
 
     override fun onEnable() {
         super.onEnable()
 
-        // Register event listeners
-        plugin.server.pluginManager.registerEvents(this, plugin)
+        // Can check for Plugin deps manually, but its handled at core level via the manifes
+        /**
+         *         if (!hasPluginDependency(this.plugin,"Vault")) {
+         *             logWarning("Vault not found - some features disabled")
+         *         }
+         */
 
         // Register commands using the CommandManager (no plugin.yml needed!)
         registerCommand(
@@ -77,11 +80,7 @@ class ExampleAddon(plugin: Plugin) : AbstractAddon(plugin), Listener {
 
         // Reload configuration or data
         logInfo("Example addon has been reloaded!")
-    }
-
-    // Example event handler
-    @EventHandler
-    fun onPlayerJoin(event: PlayerJoinEvent) {
-        event.player.sendMessage("§aWelcome! This message is from Example Addon.")
+        config.reload()
+        config.save()
     }
 }
