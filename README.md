@@ -710,4 +710,4 @@ Update an addon without restarting:
 
 ---
 
-**Made with ❤️ by the SWCCore team**
+**Made with ❤️ by the CrewCo team**
