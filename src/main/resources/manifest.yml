@@ -5,11 +5,11 @@ main: org.crewco.template.ExampleAddon
 author: XST99
 description: An example addon that demonstrates the API
 
-# Optional fields
-authors:
-  - XST99
+# Depends on other plugins
+# plugin-dependencies:
+#  - Vault
 
-#dependencies:
+# dependencies:
 #  - other-addon-id
 
-website: https://example.com
+# website: https://crewco.org/addons
