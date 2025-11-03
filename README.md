@@ -16,15 +16,15 @@ A powerful, flexible addon system for Minecraft Spigot plugins built with Kotlin
 
 ## 📋 Table of Contents
 
-- [Installation](#installaion)
-- [Commands](#commands)
-- [Permissions](#permissions)
-- [Creating an Addon](#creating-an-addon)
-- [Addon Lifecycle](#addon-lifecycle)
-- [API Reference](#api-reference)
-- [manifest.yml Format](#manifestyml-format)
-- [Examples](#examples)
-- [Troubleshooting](#troubleshooting)
+- [Installation](#-installaion)
+- [Commands](#-commands)
+- [Permissions](#-permissions)
+- [Creating an Addon](#-creating-an-addon)
+- [Addon Lifecycle](#-addon-lifecycle)
+- [API Reference](#-api-reference)
+- [manifest.yml Format](#-manifestyml-format)
+- [Examples](#-examples)
+- [Troubleshooting](#-troubleshooting)
 
 ---
 
